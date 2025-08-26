@@ -1,0 +1,64 @@
+# ---------------------
+# Python cache & logs
+# ---------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# ---------------------
+# Virtual environments
+# ---------------------
+.env
+.venv
+env/
+venv/
+*.env
+
+# ---------------------
+# Jupyter / IPython
+# ---------------------
+.ipynb_checkpoints/
+*.ipynb
+
+# ---------------------
+# Data files
+# ---------------------
+# data/raw/           # raw Kaggle dataset (too large for git)
+data/preprocessed/*
+data/baselines/*
+data/raw/*
+
+!data/raw/.gitkeep
+!data/preprocessed/.gitkeep
+!data/baselines/.gitkeep
+
+# ---------------------
+# Model artefacts
+# ---------------------
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.npy
+
+# ---------------------
+# Reports and figures
+# ---------------------
+report/figures/
+*.pdf
+
+# ---------------------
+# OS / Editor junk
+# ---------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---------------------
+# Hugging Face / Streamlit deployment
+# ---------------------
+hf_cache/
+.streamlit/
