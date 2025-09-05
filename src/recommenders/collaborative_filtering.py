@@ -142,7 +142,7 @@ class CollabrativeFilteringMF:
 
 
 class CollabrativeFileteringKNN:
-    def __init__(self, K=20):
+    def __init__(self, K=20, ratings_df=pd.read_csv(config.CSV_PATH + config.JOINED_RATINGS_CSV)):
         self.K = K
         self.model = CosineRecommender(K=K)
 
@@ -154,7 +154,7 @@ class CollabrativeFileteringKNN:
         self.item_user_matrix = None
         self.user_item_matrix = None
 
-        self.ratings_df = pd.read_csv(config.CSV_PATH + config.JOINED_RATINGS_CSV)
+        self.ratings_df = ratings_df
 
     def fit(self, try_to_load=True):
         if try_to_load:

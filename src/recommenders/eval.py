@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import config
-import collaborative_filtering
+import src.recommenders.collaborative_filtering as collaborative_filtering
 
 def train_test_split_timeaware(ratings_df, threshold=3, test_ratio=0.5):
     ratings_df = ratings_df[ratings_df["rating"] > threshold]
@@ -63,15 +63,27 @@ def main():
 
     train, test = train_test_split_timeaware(ratings)
 
-    cf = collaborative_filtering.CollabrativeFilteringMF(ratings_df=train)
-    cf.fit(False)
+    cf_mf = collaborative_filtering.CollabrativeFilteringMF(ratings_df=train)
+    cf_mf.fit(False)
 
-    results = evaluate_model(cf.recommend, train, test, ks=[10, 20])
-    print()
-    for k, res in results.items():
-        print(f"Statistis for k={k}:")
+    cf_knn = collaborative_filtering.CollabrativeFileteringKNN(ratings_df=train)
+    cf_knn.fit(False)
+
+    results_mf = evaluate_model(cf_mf.recommend, train, test, ks=[10, 20])
+    results_knn = evaluate_model(cf_knn.recommend, train, test, ks=[10, 20])
+
+    print("Matrix Factorization")
+    for k, res in results_mf.items():
+        print(f"  Statistis for k={k}:")
         for test, number in res.items():
-            print(f"  {test}: {float(number)}")
+            print(f"    {test}: {float(number)}")
+        print()
+
+    print("KNN")
+    for k, res in results_knn.items():
+        print(f"  Statistis for k={k}:")
+        for test, number in res.items():
+            print(f"    {test}: {float(number)}")
         print()
 
 if __name__ == "__main__":
